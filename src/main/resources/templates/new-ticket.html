@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>User</title>
+</head>
+<body>
+	<h1>New Ticket</h1>
+
+	<form th:action="@{/ticket/new}" method="post" th:object="${ticket}">
+		<div>
+			<label>ClientName</label>
+			<input type="text" th:field="*{clientName}" placeholder="Enter clientName">
+			<p th:errors="*{clientName}"/>
+		</div>
+	
+		<div>
+			<label>ClientPhone</label>
+			<input type="text" th:field="*{clientPhone}" placeholder="Enter clientPhone">
+		</div>
+		<div>
+			<label>Content</label>
+			<input type="text" th:field="*{content}" placeholder="Enter content">
+		</div>
+		<div>
+			<label>Status</label>
+			<input type="text" th:field="*{status}" placeholder="Enter status">
+		</div>
+		<div>
+			<label>ProsecssDate</label>
+			<input type="text" th:field="*{processDate}" placeholder="dd/MM/yyyy" />
+		</div>
+		<div>
+			<label>Department</label>
+			<select name="department.id">
+				<option th:each="t : ${departmentList}" th:value="${t.id}" th:text="${t.name}">
+			</select>
+		</div>
+		<div>
+			<button type="submit">Save</button>
+		</div>
+	</form>
+</body>
+</html>

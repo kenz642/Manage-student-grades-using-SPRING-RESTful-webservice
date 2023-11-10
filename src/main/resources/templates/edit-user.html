@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>User</title>
+</head>
+<body>
+	<h1>Edit user</h1>
+
+	<form th:action="@{/user/edit}" method="post" th:object="${user}">
+		<div>
+			<label>Id</label> 
+			<input readonly name="id" th:value="${user.id}">
+		</div>
+		<div>
+			<label th:text="#{user.name}"></label>
+			<input type="text" name="name" th:value="${user.name}">
+			<p th:errors="*{name}"/>
+		</div>
+		<div>
+			<label>Department</label>
+			<select name="department.id">
+				<option th:selected="${d.id == user.department?.id}"
+				 th:each="d : ${departmentList}"
+				  th:value="${d.id}" th:text="${d.name}">
+			</select>
+		</div>
+		
+		<div>
+			<label>Birthdate</label>
+			<input type="text" name="birthdate"  th:value="${user.birthdate}" />
+		</div>
+		
+		<div>
+			<button type="submit">Save</button>
+		</div>
+	</form>
+</body>
+</html>

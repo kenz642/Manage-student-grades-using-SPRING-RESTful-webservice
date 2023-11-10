@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>User</title>
+</head>
+<body>
+	<h1>New Department</h1>
+
+	<form th:action="@{/department/new}" method="post" th:object="${department}">
+		<div>
+			<label th:text="#{department.name}"></label>
+			<input type="text" th:field="*{name}" placeholder="Enter name...">
+			<p th:errors="*{name}"/>
+		</div>
+
+		<div>
+			<button type="submit">Save</button>
+		</div>
+	</form>
+</body>
+</html>

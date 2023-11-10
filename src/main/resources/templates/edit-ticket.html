@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Edit Ticket</title>
+</head>
+<body>
+	<h1>Edit Ticket</h1>
+
+	<form th:action="@{/ticket/edit}" method="post" th:object="${ticket}">
+		<div>
+			<label>Id</label> 
+			<input readonly name="id" th:value="${ticket.id}">
+		</div>
+		<div>
+		<div>
+			<label>ClientName</label>
+			<input type="text" th:field="*{clientName}" placeholder="Enter clientName">
+			<p th:errors="*{clientName}"/>
+			
+		<div>
+			<label>ClientPhone</label>
+			<input type="text" th:field="*{clientPhone}" placeholder="Enter clientPhone">
+		</div>
+		<div>
+			<label>Content</label>
+			<input type="text" th:field="*{content}" placeholder="Enter content">
+		</div>
+		</div>
+		<div>
+			<label>Department</label>
+			<select name="department.id">
+				<option th:selected="${d.id == ticket.department?.id}"
+				 th:each="d : ${departmentList}"
+				  th:value="${d.id}" th:text="${d.name}">
+			</select>
+		</div>
+		
+		<div>
+			<button type="submit">Save</button>
+		</div>
+	</form>
+</body>
+</html>

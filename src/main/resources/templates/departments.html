@@ -1,0 +1,53 @@
+<html layout:decorate="/template.html">
+<head>
+<title>Departments</title>
+</head>
+<body>
+<div layout:fragment="content">	
+	<h1>List Department</h1>
+	<a th:href="@{/department/new}">New</a>
+	
+	<form th:action="@{/department/search}" method="GET" th:object="${searchDTO}">
+		<input type="text" th:field="*{keyword}" placeholder="Tim ten">
+		<p th:errors="*{keyword}"></p>
+		
+		<input type="text" th:field="*{currenPage}" placeholder="Trang hien tai">
+		<input type="text" th:field="*{size}" placeholder="Sl ban ghi / trang">
+		<input type="text" th:field="*{sortedField}" placeholder="Sap xep theo cot">
+		
+		<button type="submit">Search</button>
+	</form>
+	
+	<p>
+		Tổng số trang <span th:text="${totalPage}"></span>
+	</p>
+	<p >
+		Tổng số bản ghi <span th:text="${totalElements}"></span>
+	</p>
+	
+	<table border="1">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Name</th>
+				<th>Created At</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="d : ${departmentList}">
+				<td th:text="${d.id}">1</td>
+				<td th:text="${d.name}">Test</td>
+				<td th:text="${#dates.format(d.createAt, 'dd/MM/yyyy')}">Test</td>
+				<td>
+					<a th:href="@{'/department/delete?id=' + ${d.id}}">Delete</a>
+					<a th:href="@{'/department/edit?id=' + ${d.id}}">Edit</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+
+</body>
+
+</html>

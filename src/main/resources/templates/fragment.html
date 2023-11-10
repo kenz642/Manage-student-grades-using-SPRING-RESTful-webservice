@@ -1,0 +1,26 @@
+<!-- fragment.html -->	
+
+	<!-- A grey horizontal navbar that becomes vertical on small screens -->
+<nav class="navbar navbar-expand-sm bg-light" th:fragment="menu">
+  <div class="container-fluid">
+    <!-- Links -->
+    <ul class="navbar-nav">
+      <li class="nav-item">
+	    <a class="nav-link" th:href="@{/user/list}">User</a>
+      </li>
+      <li class="nav-item">
+	    <a class="nav-link" th:href="@{/department/search}">Department</a>
+      </li>
+      <li class="nav-item">
+	    <a class="nav-link" th:href="@{/ticket/search}">Ticket</a>
+      </li>
+    </ul>
+  </div>
+
+</nav>
+		
+	<div th:fragment="footer">
+		<p>Jmaster.io</p>
+	</div>
+	
+	

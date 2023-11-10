@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>User</title>
+</head>
+<body>
+	<h1>New User</h1>
+
+	<form th:action="@{/user/new}" method="post" enctype="multipart/form-data" th:object="${user}">
+		<div>
+			<input type="file" name="file" accept="image/*" placeholder="">
+		</div>
+	
+		<div>
+			<label th:text="#{user.name}"></label>
+			<input type="text" th:field="*{name}" placeholder="Enter name...">
+			<p th:errors="*{name}"/>
+		</div>
+		<div>
+			<label th:text="#{user.username}"></label>
+			<input type="text" th:field="*{username}" placeholder="Enter username...">
+			<p th:errors="*{username}"/>
+			
+		</div>
+		<div>
+			<label>Password</label>
+			<input type="password" name="password"
+				placeholder="Enter password...">
+		</div>
+		<div>
+			<label>Department</label>
+			<select name="department.id">
+				<option th:each="d : ${departmentList}" th:value="${d.id}" th:text="${d.name}">
+			</select>
+		</div>
+		
+		<div>
+			<label>Birthdate</label>
+			<input type="text" name="birthdate" placeholder="dd/MM/yyyy" />
+		</div>
+		
+		<div>
+			<button type="submit">Save</button>
+		</div>
+	</form>
+</body>
+</html>

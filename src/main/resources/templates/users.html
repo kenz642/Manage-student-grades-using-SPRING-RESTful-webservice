@@ -1,0 +1,61 @@
+<html layout:decorate="/template.html">
+<head>
+<title>Users</title>
+</head>
+<body>
+<div layout:fragment="content">
+	<h1>List User</h1>
+	<a th:href="@{/user/new}">New User</a>
+	
+	<form th:action="@{/user/search}" method="GET" th:object="${searchDTO}">
+		<input type="text" th:field="*{keyword}" placeholder="Tim ten">
+		<p th:errors="*{keyword}"></p>
+		
+		<input type="text" th:field="*{currenPage}" placeholder="Trang hien tai">
+		<input type="text" th:field="*{size}" placeholder="Sl ban ghi / trang">
+		<input type="text" th:field="*{sortedField}" placeholder="Sap xep theo cot">
+		<button type="submit">Search</button>
+	</form>
+	<p>
+	Tổng số trang :<span th:text="${totalPage}"></span>
+	</p>
+	
+	<p>
+		Số bản ghi 1 trang :<span th:text="${totalElements}"></span>
+	</p>
+	<table border="1">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Name</th>
+				<th>Username</th>
+				<th>Password</th>
+				<th>avatar</th>
+				<th>Department</th>
+				<th>Birthdate</th>
+				<th>Action</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="u : ${userList}">
+				<td th:text="${u.id}">1</td>
+				<td th:text="${u.name}">Test</td>
+				<td th:text="${u.username}">Test</td>
+				<td th:text="${u.password}">Test</td>
+				<td>
+					<img alt="" th:src="@{'/user/download?filename=' + ${u.avatarURL}}">
+				</td>
+				<td th:text="${u.department?.name}">Test</td>
+				<td th:text="${#dates.format(u.birthdate, 'dd/MM/yyyy')}">Test</td>
+				<td>
+					<a th:href="@{'/user/delete?id=' + ${u.id}}">Delete</a>
+					<a th:href="@{'/user/edit?id=' + ${u.id}}">Edit</a>
+					<a th:href="@{'/user/edit/password?id=' + ${u.id}}">Edit Password</a>
+				</td>
+				
+			</tr>
+		</tbody>
+	</table>
+</div>
+</body>
+</html>

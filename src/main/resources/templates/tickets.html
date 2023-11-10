@@ -1,0 +1,63 @@
+<html layout:decorate="/template.html">
+<head>
+<title>Departments</title>
+</head>
+<body>
+<div layout:fragment="content">	
+	<h1>List Ticket</h1>
+	<a th:href="@{/ticket/new}">New</a>
+	
+	<form th:action="@{/ticket/search}" method="GET" th:object="${searchTicketDTO}">
+		<input type="text" th:field="*{keyword}" placeholder="Tim ten">
+		<p th:errors="*{keyword}"></p>
+		
+		<input type="text" th:field="*{currenPage}" placeholder="Trang hien tai">
+		<input type="text" th:field="*{size}" placeholder="Sl ban ghi / trang">
+		<input type="text" th:field="*{sortedField}" placeholder="Sap xep theo cot">
+		
+		<button type="submit">Search</button>
+	</form>
+	
+	<p>
+		Tổng số trang <span th:text="${totalPage}"></span>
+	</p>
+	<p >
+		Tổng số bản ghi <span th:text="${totalElements}"></span>
+	</p>
+	
+	<table border="1">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>clientName</th>
+				<th>clientPhone</th>
+				<th>content</th>
+				<th>status</th>
+				<th>processDate</th>
+				<th>department</th>
+				<th>createdAt</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="t : ${ticketList}">
+				<td th:text="${t.id}">1</td>
+				<td th:text="${t.clientName}">Test</td>
+				<td th:text="${t.clientPhone}">Test</td>
+				<td th:text="${t.content}">Test</td>
+				<td th:text="${t.status}">Test</td>
+				<td th:text="${#dates.format(t.processDate, 'dd/MM/yyyy')}">Test</td>
+				<td th:text="${t.department?.name}">Test</td>
+				<td th:text="${#dates.format(t.createdAt, 'dd/MM/yyyy')}">Test</td>
+				<td>
+					<a th:href="@{'/ticket/delete?id=' + ${t.id}}">Delete</a>
+					<a th:href="@{'/ticket/edit?id=' + ${t.id}}">Edit</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+
+</body>
+
+</html>
